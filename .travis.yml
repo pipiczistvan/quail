@@ -20,7 +20,7 @@ android:
     - android-29
 
 # script
-script: client/android/gradlew build
+script: .travis/build.sh
 
 after_script: ./list.sh
 
