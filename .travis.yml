@@ -8,3 +8,4 @@ android:
 
 # script
 script: client/android/gradlew build
+after_success: .travis/deploy.sh
