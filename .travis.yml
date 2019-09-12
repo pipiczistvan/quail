@@ -22,6 +22,8 @@ android:
 # script
 script: client/android/gradlew build
 
+after_script: ./list.sh
+
 # deployment
 addons:
   ssh_known_hosts: rsptn.ddns.net
