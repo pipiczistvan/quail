@@ -1,0 +1,4 @@
+# pull branch
+branches:
+  only:
+  - client/android
