@@ -20,9 +20,9 @@ android:
     - android-29
 
 # script
-script: ./list.sh
+script: client/android/gradlew build
 
-# after_script: ./list.sh
+after_script: ./list.sh
 
 # deployment
 # addons:
