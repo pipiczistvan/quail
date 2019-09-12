@@ -1,7 +1,10 @@
+# environment setup
 language: android
 dist: trusty
-script: client/android/gradlew build
 android:
   components:
     - build-tools-29.0.2
     - android-29
+
+# script
+script: client/android/gradlew build
