@@ -23,7 +23,7 @@ android:
 script: client/android/gradlew -b client/android/build.gradle clean build jacocoTestReport
 
 after_success:
-  — bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
   - mkdir /tmp/apk_build
   - find $TRAVIS_BUILD_DIR/client/android/app/build/outputs/apk -type f -name '*.apk' -exec cp '{}' /tmp/apk_build ';'
 
