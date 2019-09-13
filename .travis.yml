@@ -22,6 +22,10 @@ android:
 # script
 script: client/android/gradlew -b client/android/build.gradle clean build
 
+after_script:
+  - mkdir /tmp/apk_build
+  - find $TRAVIS_BUILD_DIR/client/android/app/build/outputs/apk -type f -name '*.apk' -exec cp '{}' /tmp/apk_build ';'
+
 # ssh setup
 addons:
   ssh_known_hosts: rsptn.ddns.net
@@ -36,9 +40,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script:
-    - mkdir /tmp/apk_build
-    - find $TRAVIS_BUILD_DIR/client/android/app/build/outputs/apk -type f -name '*.apk' -exec cp '{}' /tmp/apk_build ';'
-    - rsync -r --delete-after --quiet /tmp/apk_build pi@rsptn.ddns.net:/mnt/hdd1/appholder
+  script: rsync -r --delete-after --quiet /tmp/apk_build pi@rsptn.ddns.net:/mnt/hdd1/appholder
   on:
     branch: client/android
