@@ -22,7 +22,7 @@ android:
 # script
 script: client/android/gradlew -b client/android/build.gradle clean build
 
-after_script:
+after_success:
   - mkdir /tmp/apk_build
   - echo Created /tmp/apk_build dir
   - find $TRAVIS_BUILD_DIR/client/android/app/build/outputs/apk -type f -name '*.apk' -exec cp '{}' /tmp/apk_build ';'
