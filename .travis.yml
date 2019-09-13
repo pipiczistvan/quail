@@ -24,7 +24,10 @@ script: client/android/gradlew -b client/android/build.gradle clean build
 
 after_script:
   - mkdir /tmp/apk_build
+  - echo Created /tmp/apk_build dir
   - find $TRAVIS_BUILD_DIR/client/android/app/build/outputs/apk -type f -name '*.apk' -exec cp '{}' /tmp/apk_build ';'
+  - echo copied files
+  - ls /tmp/apk_build -la
 
 # ssh setup
 addons:
@@ -40,6 +43,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet /tmp/apk_build pi@rsptn.ddns.net:/mnt/hdd1/appholder
+  script: rsync -r --delete-after --quiet /tmp/apk_build/ pi@rsptn.ddns.net:/mnt/hdd1/appholder/
   on:
     branch: client/android
