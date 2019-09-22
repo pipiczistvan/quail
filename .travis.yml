@@ -11,7 +11,7 @@ before_script:
 
 # script
 script: 
-  - yarn webpack
+  - yarn build
   - yarn test
 
 # after success steps

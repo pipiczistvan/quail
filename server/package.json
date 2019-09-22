@@ -8,7 +8,7 @@
   "scripts": {
     "build": "webpack",
     "start:dev": "export NODE_ENV=development || set NODE_ENV=development&& webpack",
-    "run:dev": "export NODE_ENV=development || set NODE_ENV=development&& nodemon build/index.js",
+    "run:dev": "nodemon build/index.js",
     "test": "jest --coverage"
   },
   "devDependencies": {

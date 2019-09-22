@@ -19,11 +19,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  plugins: [
-    new WebpackShellPlugin({
-      onBuildEnd: ['yarn run:dev']
-    })
-  ],
+  plugins: [],
   module: {
     rules: [
       {
@@ -36,3 +32,6 @@ module.exports = {
   }
 }
 
+if (NODE_ENV === 'development') {
+  module.exports.plugins.push(new WebpackShellPlugin({onBuildEnd: ['yarn run:dev']}))
+}
