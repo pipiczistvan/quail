@@ -2,3 +2,4 @@
 branches:
   only:
   - client/android
+  - server
