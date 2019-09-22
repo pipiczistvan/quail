@@ -1,4 +1,13 @@
-# pull branch
-branches:
-  only:
-  - client/android
+# environment setup
+language: node_js
+node_js:
+  - 7
+cache: yarn
+
+# setup
+before_script: 
+  - cd server
+  - yarn install
+
+# script
+script: yarn test
