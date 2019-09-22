@@ -1,7 +1,7 @@
 # environment setup
 language: node_js
 node_js:
-  - 7
+  - 10
 cache: yarn
 
 # setup
