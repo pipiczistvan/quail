@@ -10,7 +10,9 @@ before_script:
   - yarn install
 
 # script
-script: yarn test
+script: 
+  - yarn webpack
+  - yarn test
 
 # after success steps
 after_success:
