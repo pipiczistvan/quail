@@ -11,3 +11,7 @@ before_script:
 
 # script
 script: yarn test
+
+# after success steps
+after_success:
+  - yarn codecov
