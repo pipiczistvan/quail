@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 
-const AVAILABLE_TREE_IDS_JSON = 'data/available_tree_ids.json';
+const PRELOAD_JSON = 'data/preload.json';
 const TREES_JSON = 'data/trees.json';
 
 var app = express();
@@ -11,8 +11,8 @@ app.listen(3000, () => {
     console.log("Server running on port 3000");
 });
 
-app.get("/getAvailableTreeIds", (req, res, next) => {
-    var data = JSON.parse(fs.readFileSync(AVAILABLE_TREE_IDS_JSON, 'utf8'));
+app.get("/preload", (req, res, next) => {
+    var data = JSON.parse(fs.readFileSync(PRELOAD_JSON, 'utf8'));
 
     res.json(data);
 });
