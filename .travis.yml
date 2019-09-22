@@ -18,9 +18,13 @@ android:
   components:
     - build-tools-29.0.2
     - android-29
+env:
+  global:
+   # install timeout in minutes (2 minutes by default)
+    - ADB_INSTALL_TIMEOUT=8
 
 # script
-script: client/android/gradlew -b client/android/build.gradle clean build jacocoTestReport
+script: client/android/gradlew -b client/android/build.gradle clean assembleDebug assembleRelease testDebug jacocoTestReport
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

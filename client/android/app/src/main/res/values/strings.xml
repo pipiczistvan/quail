@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Quail</string>
+    <string name="retry">Retry</string>
+    <string name="tree_error">An error occurred while loading the available tree ids</string>
 </resources>
