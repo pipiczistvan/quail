@@ -9,11 +9,12 @@
     "build": "webpack",
     "start:dev": "export NODE_ENV=development || set NODE_ENV=development&& webpack",
     "run:dev": "export NODE_ENV=development || set NODE_ENV=development&& nodemon build/index.js",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@types/jest": "^24.0.4",
     "@types/node": "^11.9.3",
+    "codecov": "^3.6.1",
     "jest": "^24.1.0",
     "nodemon": "^1.18.10",
     "supertest": "^3.4.2",
