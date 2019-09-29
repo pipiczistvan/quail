@@ -1,4 +1,4 @@
-package com.github.pipiczistvan.quail.model
+package com.github.pipiczistvan.quail.persistence.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

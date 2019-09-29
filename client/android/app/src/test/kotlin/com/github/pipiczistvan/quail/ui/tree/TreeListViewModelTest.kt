@@ -1,10 +1,10 @@
 package com.github.pipiczistvan.quail.ui.tree
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.github.pipiczistvan.quail.model.Preload
-import com.github.pipiczistvan.quail.model.Tree
-import com.github.pipiczistvan.quail.model.TreeDao
-import com.github.pipiczistvan.quail.network.TreeApi
+import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
+import com.github.pipiczistvan.quail.network.rest.bean.Preload
+import com.github.pipiczistvan.quail.persistence.database.dao.TreeDao
+import com.github.pipiczistvan.quail.persistence.database.entity.Tree
 import com.github.pipiczistvan.quail.utils.ApiUtils
 import com.github.pipiczistvan.quail.utils.POST_MOCK_PATH
 import io.reactivex.Observable
@@ -25,7 +25,7 @@ class TreeListViewModelTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    private val testRetrofitPostApi = object : TreeApi {
+    private val testRetrofitPreloadApi = object : PreloadApi {
         override fun preload(): Observable<Preload> {
             return Observable.fromCallable { ApiUtils.getUrl<Preload>(POST_MOCK_PATH) }
         }
@@ -54,7 +54,7 @@ class TreeListViewModelTest {
     fun loadTrees_success() {
         POST_MOCK_PATH = "preload.json"
         val treeDao = TreeDaoImpl()
-        val viewModel = TreeListViewModel(treeDao, testRetrofitPostApi)
+        val viewModel = TreeListViewModel(treeDao, testRetrofitPreloadApi)
         assertEquals("Check that trees are inserted in database", 3, treeDao.all.size)
         assertEquals("Check that adapter has correct number of rows", 3, viewModel.treeListAdapter.itemCount)
     }

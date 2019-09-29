@@ -4,15 +4,15 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.pipiczistvan.quail.R
-import com.github.pipiczistvan.quail.model.Tree
-import com.github.pipiczistvan.quail.model.TreeDao
-import com.github.pipiczistvan.quail.network.TreeApi
+import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
+import com.github.pipiczistvan.quail.persistence.database.dao.TreeDao
+import com.github.pipiczistvan.quail.persistence.database.entity.Tree
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class TreeListViewModel(private val treeDao: TreeDao, private val treeApi: TreeApi) : ViewModel() {
+class TreeListViewModel(private val treeDao: TreeDao, private val preloadApi: PreloadApi) : ViewModel() {
     val treeListAdapter: TreeListAdapter = TreeListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
@@ -34,7 +34,7 @@ class TreeListViewModel(private val treeDao: TreeDao, private val treeApi: TreeA
         subscription = Observable.fromCallable { treeDao.all }
             .concatMap { dbTreeList ->
                 if (dbTreeList.isEmpty())
-                    treeApi.preload().concatMap { preload ->
+                    preloadApi.preload().concatMap { preload ->
                         val trees: List<Tree> = preload.availableTreeIds.map { id -> Tree(id) }
                         treeDao.insertAll(*trees.toTypedArray())
                         Observable.just(trees)

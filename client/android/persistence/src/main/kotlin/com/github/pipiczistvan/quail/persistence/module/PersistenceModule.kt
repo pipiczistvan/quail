@@ -1,8 +1,8 @@
-package com.github.pipiczistvan.quail.dagger
+package com.github.pipiczistvan.quail.persistence.module
 
 import android.content.Context
 import androidx.room.Room
-import com.github.pipiczistvan.quail.model.database.AppDatabase
+import com.github.pipiczistvan.quail.persistence.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,7 +12,7 @@ class PersistenceModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(context: Context) = Room.databaseBuilder(context, AppDatabase::class.java, "trees").build()
+    fun provideAppDatabase(context: Context) = Room.databaseBuilder(context, AppDatabase::class.java, "QuailDatabase").build()
 
     @Provides
     @Singleton

@@ -1,7 +1,6 @@
-package com.github.pipiczistvan.quail.dagger
+package com.github.pipiczistvan.quail.network.module
 
-import com.github.pipiczistvan.quail.network.TreeApi
-import com.github.pipiczistvan.quail.utils.BASE_URL
+import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -32,7 +31,7 @@ class NetworkModule {
     @Singleton
     fun provideRetroFit(client: OkHttpClient) =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(com.github.pipiczistvan.quail.network.utils.BASE_URL)
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
@@ -40,6 +39,6 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideTreeApi(retrofit: Retrofit) =
-        retrofit.create(TreeApi::class.java)
+    fun providePreloadApi(retrofit: Retrofit) =
+        retrofit.create(PreloadApi::class.java)
 }
