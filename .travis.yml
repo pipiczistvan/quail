@@ -2,3 +2,4 @@
 branches:
   except:
   - /^feature\/.*$/
+  - master
