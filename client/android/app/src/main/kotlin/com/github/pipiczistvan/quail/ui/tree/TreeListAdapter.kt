@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.pipiczistvan.quail.R
 import com.github.pipiczistvan.quail.databinding.ItemTreeBinding
-import com.github.pipiczistvan.quail.persistence.database.entity.Tree
+import com.github.pipiczistvan.quail.integration.domain.Tree
 
 class TreeListAdapter : RecyclerView.Adapter<TreeListAdapter.ViewHolder>() {
     private lateinit var treeList: List<Tree>

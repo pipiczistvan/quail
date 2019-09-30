@@ -10,7 +10,7 @@ lateinit var POST_MOCK_PATH: String
 
 class ApiUtils {
     companion object {
-        inline fun <reified T : Any> getUrl(jsonPath: String): T? {
+        inline fun <reified T : Any> getUrl(jsonPath: String): T {
             val buf = StringBuilder()
 
             val kotlinBuildClassesFolder = ApiUtils::class.java.classLoader!!.getResource(".").path
@@ -35,7 +35,7 @@ class ApiUtils {
             val moshi = Moshi.Builder().build()
             val jsonAdapter = moshi.adapter<T>(object : TypeToken<T>() {}.type)
 
-            return jsonAdapter.fromJson(buf.toString())
+            return jsonAdapter.fromJson(buf.toString())!!
         }
     }
 }

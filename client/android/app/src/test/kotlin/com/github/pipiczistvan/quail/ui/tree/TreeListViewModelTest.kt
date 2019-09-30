@@ -1,10 +1,12 @@
 package com.github.pipiczistvan.quail.ui.tree
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
-import com.github.pipiczistvan.quail.network.rest.bean.Preload
+import com.github.pipiczistvan.quail.integration.domain.Preload
+import com.github.pipiczistvan.quail.integration.domain.Tree
+import com.github.pipiczistvan.quail.integration.service.PreloadService
+import com.github.pipiczistvan.quail.integration.service.TreeService
 import com.github.pipiczistvan.quail.persistence.database.dao.TreeDao
-import com.github.pipiczistvan.quail.persistence.database.entity.Tree
+import com.github.pipiczistvan.quail.persistence.database.entity.TreeEntity
 import com.github.pipiczistvan.quail.utils.ApiUtils
 import com.github.pipiczistvan.quail.utils.POST_MOCK_PATH
 import io.reactivex.Observable
@@ -24,12 +26,6 @@ import java.util.concurrent.TimeUnit
 class TreeListViewModelTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
-
-    private val testRetrofitPreloadApi = object : PreloadApi {
-        override fun preload(): Observable<Preload> {
-            return Observable.fromCallable { ApiUtils.getUrl<Preload>(POST_MOCK_PATH) }
-        }
-    }
 
     @Before
     fun setUpRxSchedulers() {
@@ -53,20 +49,35 @@ class TreeListViewModelTest {
     @Test
     fun loadTrees_success() {
         POST_MOCK_PATH = "preload.json"
-        val treeDao = TreeDaoImpl()
-        val viewModel = TreeListViewModel(treeDao, testRetrofitPreloadApi)
-        assertEquals("Check that trees are inserted in database", 3, treeDao.all.size)
+        val treeService = TreeServiceMock()
+        val preloadService = PreloadServiceMock()
+        val viewModel = TreeListViewModel(treeService, preloadService)
+        assertEquals("Check that trees are inserted in database", 3, treeService.trees.size)
         assertEquals("Check that adapter has correct number of rows", 3, viewModel.treeListAdapter.itemCount)
     }
 }
 
-private class TreeDaoImpl : TreeDao {
+private class TreeServiceMock : TreeService {
     var trees = mutableListOf<Tree>()
 
-    override val all: List<Tree>
-        get() = trees
+    override fun findAll() = trees
 
-    override fun insertAll(vararg trees: Tree) {
+    override fun insertAll(trees: List<Tree>) {
         this.trees.addAll(trees)
     }
+}
+
+private class TreeDaoMock : TreeDao {
+    var trees = mutableListOf<TreeEntity>()
+
+    override val all: List<TreeEntity>
+        get() = trees
+
+    override fun insertAll(trees: List<TreeEntity>) {
+        this.trees.addAll(trees)
+    }
+}
+
+private class PreloadServiceMock : PreloadService {
+    override fun preload() = Observable.fromCallable { ApiUtils.getUrl<Preload>(POST_MOCK_PATH) }
 }

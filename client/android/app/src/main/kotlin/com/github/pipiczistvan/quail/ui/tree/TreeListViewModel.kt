@@ -4,15 +4,15 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.pipiczistvan.quail.R
-import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
-import com.github.pipiczistvan.quail.persistence.database.dao.TreeDao
-import com.github.pipiczistvan.quail.persistence.database.entity.Tree
+import com.github.pipiczistvan.quail.integration.domain.Tree
+import com.github.pipiczistvan.quail.integration.service.PreloadService
+import com.github.pipiczistvan.quail.integration.service.TreeService
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class TreeListViewModel(private val treeDao: TreeDao, private val preloadApi: PreloadApi) : ViewModel() {
+class TreeListViewModel(private val treeService: TreeService, private val preloadService: PreloadService) : ViewModel() {
     val treeListAdapter: TreeListAdapter = TreeListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
@@ -31,12 +31,12 @@ class TreeListViewModel(private val treeDao: TreeDao, private val preloadApi: Pr
     }
 
     private fun preload() {
-        subscription = Observable.fromCallable { treeDao.all }
-            .concatMap { dbTreeList ->
+        subscription = Observable.fromCallable(treeService::findAll)
+            .flatMap { dbTreeList ->
                 if (dbTreeList.isEmpty())
-                    preloadApi.preload().concatMap { preload ->
+                    preloadService.preload().concatMap { preload ->
                         val trees: List<Tree> = preload.availableTreeIds.map { id -> Tree(id) }
-                        treeDao.insertAll(*trees.toTypedArray())
+                        treeService.insertAll(trees)
                         Observable.just(trees)
                     }
                 else

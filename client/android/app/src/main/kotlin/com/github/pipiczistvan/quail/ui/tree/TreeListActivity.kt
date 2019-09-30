@@ -12,17 +12,17 @@ import com.github.pipiczistvan.quail.R
 import com.github.pipiczistvan.quail.application.QuailApplication
 import com.github.pipiczistvan.quail.databinding.ActivityTreeListBinding
 import com.github.pipiczistvan.quail.injection.ViewModelFactory
-import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
-import com.github.pipiczistvan.quail.persistence.database.dao.TreeDao
+import com.github.pipiczistvan.quail.integration.service.PreloadService
+import com.github.pipiczistvan.quail.integration.service.TreeService
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class TreeListActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var treeDao: TreeDao
+    lateinit var treeService: TreeService
     @Inject
-    lateinit var preloadApi: PreloadApi
+    lateinit var preloadService: PreloadService
 
     private lateinit var binding: ActivityTreeListBinding
     private lateinit var viewModel: TreeListViewModel
@@ -36,7 +36,7 @@ class TreeListActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tree_list)
         binding.treeList.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(treeDao, preloadApi)).get(TreeListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(treeService, preloadService)).get(TreeListViewModel::class.java)
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })

@@ -1,4 +1,4 @@
-package com.github.pipiczistvan.quail.service
+package com.github.pipiczistvan.quail.integration
 
 import org.junit.Test
 
