@@ -1,5 +1,4 @@
-# pull branch
+# build blocklist
 branches:
-  only:
-  - client/android
-  - server
+  except:
+  - /^feature\/.*$/
