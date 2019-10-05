@@ -1,4 +1,4 @@
-package com.github.pipiczistvan.quail.ui.tree
+package com.github.pipiczistvan.quail.ui.fragment.splash.tree
 
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +13,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class TreeListViewModel(private val treeService: TreeService, private val preloadService: PreloadService) : ViewModel() {
+
     val treeListAdapter: TreeListAdapter = TreeListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()

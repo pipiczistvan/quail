@@ -1,46 +1,53 @@
-package com.github.pipiczistvan.quail.ui.tree
+package com.github.pipiczistvan.quail.ui.fragment.splash.tree
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.pipiczistvan.quail.R
 import com.github.pipiczistvan.quail.application.QuailApplication
-import com.github.pipiczistvan.quail.databinding.ActivityTreeListBinding
+import com.github.pipiczistvan.quail.databinding.FragmentTreeListBinding
 import com.github.pipiczistvan.quail.injection.ViewModelFactory
 import com.github.pipiczistvan.quail.integration.service.PreloadService
 import com.github.pipiczistvan.quail.integration.service.TreeService
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
-class TreeListActivity : AppCompatActivity() {
+class TreeListFragment : Fragment() {
 
     @Inject
     lateinit var treeService: TreeService
     @Inject
     lateinit var preloadService: PreloadService
 
-    private lateinit var binding: ActivityTreeListBinding
+    private lateinit var binding: FragmentTreeListBinding
     private lateinit var viewModel: TreeListViewModel
     private var errorSnackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (application as QuailApplication).quailComponent.inject(this)
+        (activity!!.application as QuailApplication).quailComponent.inject(this)
+    }
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_tree_list)
-        binding.treeList.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(treeService, preloadService)).get(TreeListViewModel::class.java)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentTreeListBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(treeService, preloadService))
+            .get(TreeListViewModel::class.java)
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })
+
+        binding.treeList.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.viewModel = viewModel
+
+        return binding.root
     }
 
     private fun showError(@StringRes errorMessage: Int) {

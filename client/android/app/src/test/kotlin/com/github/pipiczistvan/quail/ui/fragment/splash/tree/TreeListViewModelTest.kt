@@ -1,4 +1,4 @@
-package com.github.pipiczistvan.quail.ui.tree
+package com.github.pipiczistvan.quail.ui.fragment.splash.tree
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.pipiczistvan.quail.integration.domain.Preload
