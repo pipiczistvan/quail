@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   android:background="@color/colorPrimary">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-            android:text="@string/splash_screen_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="@string/splash_screen_title"
-            app:layout_constraintBottom_toTopOf="@+id/fragment_loading"
-            android:layout_marginBottom="32dp" android:textSize="36sp" android:textColor="@color/colorAccent"/>
+    <data>
+        <variable
+                name="viewModel"
+                type="com.github.pipiczistvan.quail.ui.fragment.splash.SplashScreenViewModel"/>
+    </data>
 
-    <fragment android:id="@+id/fragment_loading"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:name="com.github.pipiczistvan.quail.ui.fragment.loading.LoadingFragment"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintTop_toTopOf="parent" tools:layout="@layout/fragment_loading"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+                android:text="@string/splash_screen_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="@string/splash_screen_title"
+                app:layout_constraintBottom_toTopOf="@+id/fragment_loading"
+                android:layout_marginBottom="32dp"
+                android:textSize="36sp"
+                android:textColor="@color/colorAccent"/>
+
+        <fragment android:id="@+id/fragment_loading"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:name="com.github.pipiczistvan.quail.ui.fragment.loading.LoadingFragment"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  tools:layout="@layout/fragment_loading"/>
+
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:mutableVisibility="@{viewModel.getLoadingVisibility()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_loading"
+                android:layout_marginTop="32dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

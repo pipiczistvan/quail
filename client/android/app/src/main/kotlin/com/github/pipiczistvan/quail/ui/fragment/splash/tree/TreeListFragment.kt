@@ -14,17 +14,13 @@ import com.github.pipiczistvan.quail.R
 import com.github.pipiczistvan.quail.application.QuailApplication
 import com.github.pipiczistvan.quail.databinding.FragmentTreeListBinding
 import com.github.pipiczistvan.quail.injection.ViewModelFactory
-import com.github.pipiczistvan.quail.integration.service.PreloadService
-import com.github.pipiczistvan.quail.integration.service.TreeService
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class TreeListFragment : Fragment() {
 
     @Inject
-    lateinit var treeService: TreeService
-    @Inject
-    lateinit var preloadService: PreloadService
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var binding: FragmentTreeListBinding
     private lateinit var viewModel: TreeListViewModel
@@ -38,8 +34,7 @@ class TreeListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTreeListBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(treeService, preloadService))
-            .get(TreeListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(TreeListViewModel::class.java)
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })

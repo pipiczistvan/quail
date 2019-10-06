@@ -2,5 +2,6 @@
     <string name="app_name">Quail</string>
     <string name="retry">Retry</string>
     <string name="tree_error">An error occurred while loading the available tree ids</string>
+    <string name="preload_error">An error occurred while downloading preload data</string>
     <string name="splash_screen_title">Quail</string>
 </resources>

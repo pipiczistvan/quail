@@ -4,14 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.github.pipiczistvan.quail.integration.service.PreloadService
 import com.github.pipiczistvan.quail.integration.service.TreeService
+import com.github.pipiczistvan.quail.ui.fragment.splash.SplashScreenViewModel
 import com.github.pipiczistvan.quail.ui.fragment.splash.tree.TreeListViewModel
 
 class ViewModelFactory(private val treeService: TreeService, private val preloadService: PreloadService) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TreeListViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return TreeListViewModel(treeService, preloadService) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        @Suppress("UNCHECKED_CAST")
+        return when(modelClass) {
+            TreeListViewModel::class.java -> TreeListViewModel(treeService, preloadService)
+            SplashScreenViewModel::class.java -> SplashScreenViewModel(preloadService)
+            else -> throw IllegalArgumentException("Unknown ViewModel class")
+        } as T
     }
 }
