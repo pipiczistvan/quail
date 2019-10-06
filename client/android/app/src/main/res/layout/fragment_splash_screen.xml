@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="@color/colorPrimary">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+            android:text="@string/splash_screen_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@string/splash_screen_title"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_loading"
+            android:layout_marginBottom="32dp" android:textSize="36sp" android:textColor="@color/colorAccent"/>
 
-        <fragment
-                android:id="@+id/fragment_tree_list"
-                android:name="com.github.pipiczistvan.quail.ui.fragment.splash.tree.TreeListFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+    <fragment android:id="@+id/fragment_loading"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:name="com.github.pipiczistvan.quail.ui.fragment.loading.LoadingFragment"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintTop_toTopOf="parent" tools:layout="@layout/fragment_loading"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
