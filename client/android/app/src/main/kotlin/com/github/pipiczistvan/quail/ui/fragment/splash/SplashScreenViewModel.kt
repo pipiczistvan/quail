@@ -9,8 +9,9 @@ import com.github.pipiczistvan.quail.integration.service.PreloadService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class SplashScreenViewModel(private val preloadService: PreloadService) : ViewModel() {
+class SplashScreenViewModel @Inject constructor(private val preloadService: PreloadService) : ViewModel() {
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()

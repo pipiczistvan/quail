@@ -1,10 +1,10 @@
 package com.github.pipiczistvan.quail.ui.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.github.pipiczistvan.quail.R
+import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

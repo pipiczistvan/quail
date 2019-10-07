@@ -11,8 +11,9 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class TreeListViewModel(private val treeService: TreeService, private val preloadService: PreloadService) : ViewModel() {
+class TreeListViewModel @Inject constructor(private val treeService: TreeService, private val preloadService: PreloadService) : ViewModel() {
 
     val treeListAdapter: TreeListAdapter = TreeListAdapter()
 
