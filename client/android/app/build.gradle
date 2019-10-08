@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco-android'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 29
@@ -29,6 +30,9 @@ android {
     dataBinding {
         enabled = true
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
@@ -45,6 +49,10 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$android_constraintlayout_version"
     implementation "com.android.support:recyclerview-v7:$android_recyclerview_version"
     implementation "com.google.android.material:material:$android_material_version"
+
+    // Android navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$android_navigation"
 
     // LiveData & ViewModel
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"

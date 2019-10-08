@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph.xml"
+            app:startDestination="@id/splashScreenFragment">
+
+    <fragment android:id="@+id/treeListFragment"
+              android:name="com.github.pipiczistvan.quail.ui.fragment.splash.tree.TreeListFragment"
+              android:label="TreeListFragment"
+              tools:layout="@layout/fragment_tree_list">
+        <argument android:name="availableTreeIds"
+                  app:argType="com.github.pipiczistvan.quail.ui.fragment.splash.tree.TreeListFragmentArgument"/>
+    </fragment>
+    <fragment android:id="@+id/splashScreenFragment"
+              android:name="com.github.pipiczistvan.quail.ui.fragment.splash.SplashScreenFragment"
+              android:label="SplashScreenFragment"
+              tools:layout="@layout/fragment_splash_screen">
+        <action android:id="@+id/action_splashScreenFragment_to_treeListFragment"
+                app:destination="@+id/treeListFragment" app:enterAnim="@anim/nav_default_enter_anim"
+                app:launchSingleTop="false"/>
+    </fragment>
+</navigation>

@@ -15,6 +15,7 @@ class SplashScreenViewModel @Inject constructor(private val preloadService: Prel
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
+    val preloadData: MutableLiveData<Preload> = MutableLiveData()
     val errorClickListener = View.OnClickListener { preload() }
 
     private lateinit var subscription: Disposable
@@ -50,6 +51,7 @@ class SplashScreenViewModel @Inject constructor(private val preloadService: Prel
     }
 
     private fun onRetrievePreloadSuccess(preload: Preload) {
+        preloadData.value = preload
     }
 
     private fun onRetrievePreloadError() {
