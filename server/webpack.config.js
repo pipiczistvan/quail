@@ -1,6 +1,7 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
 const WebpackShellPlugin = require('webpack-shell-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const {
   NODE_ENV = 'production',
@@ -11,7 +12,6 @@ module.exports = {
   mode: NODE_ENV,
   target: 'node',
   watch: NODE_ENV === 'development',
-  externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.js'
@@ -19,7 +19,14 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  plugins: [],
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
+  plugins: [
+    new CopyPlugin([
+      { from: 'res', to: 'res' }
+    ])
+  ],
   module: {
     rules: [
       {
