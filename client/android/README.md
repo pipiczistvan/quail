@@ -21,3 +21,5 @@ To generate debug application run the following command:
     - Untick `Only sync active variant` in settings and retry sync.
 4. I get `Unresolved reference: DaggerAppComponent`.
     - Run a `Build Project` to generate necessary Dagger files.
+5. I get `No tests found for given includes: ...` when trying to run test in submodule.
+    - Select `Run tests with IntelliJ IDEA` at `File/Settings/Build, Execution, Deployment/Build Tools/Gradle/`
