@@ -1,45 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+apply from: '../buildsystem/android_commons.gradle'
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
-    defaultConfig {
-        minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs = ['src/test/kotlin']
         test.resources.srcDirs = ["src/test/assets"]
-        androidTest.java.srcDirs = ['src/androidTest/kotlin']
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    
-    // Quail modules
     implementation project(':network')
     implementation project(':persistence')
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    // Retrofit
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-
-    // Testing
-    implementation "junit:junit:$test_junit_version"
-    implementation "android.arch.core:core-testing:$test_core_testing_version"
-    implementation "com.google.code.gson:gson:$test_gson_version"
+    rootProject.mock.each { item ->
+        add(item.configuration, item.dependency, item.options)
+    }
 }

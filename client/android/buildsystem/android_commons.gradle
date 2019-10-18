@@ -1,0 +1,25 @@
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs = ['src/test/kotlin']
+        androidTest.java.srcDirs = ['src/androidTest/kotlin']
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}

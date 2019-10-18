@@ -5,27 +5,17 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco-android'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
+apply from: '../buildsystem/android_commons.gradle'
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.github.pipiczistvan.quail"
-        minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs = ['src/test/kotlin']
-        androidTest.java.srcDirs = ['src/androidTest/kotlin']
     }
     dataBinding {
         enabled = true
@@ -36,43 +26,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    // Quail modules
     implementation project(':integration')
     testImplementation project(':mock')
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    // Android support
-    implementation "androidx.appcompat:appcompat:$android_appcompat_version"
-    implementation "androidx.constraintlayout:constraintlayout:$android_constraintlayout_version"
-    implementation "com.android.support:recyclerview-v7:$android_recyclerview_version"
-    implementation "com.google.android.material:material:$android_material_version"
-
-    // Android navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$android_navigation"
-
-    // LiveData & ViewModel
-    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
-
-    // Dagger 2
-    implementation "com.google.dagger:dagger:$dagger2_version"
-    implementation "com.google.dagger:dagger-android-support:$dagger2_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger2_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
-    compileOnly "org.glassfish:javax.annotation:$javax_annotation_version"
-
-    //Rx
-    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
-
-    // Testing
-    testImplementation "junit:junit:$test_junit_version"
-    androidTestImplementation "androidx.test:runner:$test_runner_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_core_version"
-    testImplementation "android.arch.core:core-testing:$test_core_testing_version"
-    testImplementation "com.google.code.gson:gson:$test_gson_version"
+    rootProject.app.each { item ->
+        add(item.configuration, item.dependency, item.options)
+    }
 }

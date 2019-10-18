@@ -6,7 +6,6 @@ import com.github.pipiczistvan.quail.mock.network.PreloadApiMock
 import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class PreloadServiceTest {
 

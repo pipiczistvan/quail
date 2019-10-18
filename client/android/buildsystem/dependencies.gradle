@@ -1,0 +1,104 @@
+ext {
+    //
+    // ===== Libraries =====
+    //
+    android_appcompat = "androidx.appcompat:appcompat:1.1.0"
+    android_constraintlayout = "androidx.constraintlayout:constraintlayout:1.1.3"
+    android_extensions = "android.arch.lifecycle:extensions:1.1.1"
+    android_material = "com.google.android.material:material:1.0.0"
+    android_navigation_fragment_ktx = "androidx.navigation:navigation-fragment-ktx:2.1.0"
+    android_navigation_ui_ktx = "androidx.navigation:navigation-ui-ktx:2.1.0"
+    android_recyclerview_v7 = "com.android.support:recyclerview-v7:1.1.0"
+    dagger = "com.google.dagger:dagger:2.24"
+    dagger_android_processor = "com.google.dagger:dagger-android-processor:2.24"
+    dagger_android_support = "com.google.dagger:dagger-android-support:2.24"
+    dagger_compiler = "com.google.dagger:dagger-compiler:2.24"
+    javax_annotations = "org.glassfish:javax.annotation:3.1.1"
+    kotlin_stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.50"
+    okhttp3_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:4.2.0"
+    retrofit = "com.squareup.retrofit2:retrofit:2.6.1"
+    retrofit_adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:2.6.1"
+    retrofit_converter_moshi = "com.squareup.retrofit2:converter-moshi:2.6.1"
+    room_compiler = "android.arch.persistence.room:compiler:1.1.1"
+    room_runtime = "android.arch.persistence.room:runtime:1.1.1"
+    rxandroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
+    rxjava = "io.reactivex.rxjava2:rxjava:2.2.10"
+
+    android_junit = "androidx.test.ext:junit:1.1.1"
+    android_test_runner = "androidx.test:runner:1.2.0"
+    gson = "com.google.code.gson:gson:2.8.5"
+    junit = "junit:junit:4.12"
+    reactive_streams = "org.reactivestreams:reactive-streams:1.0.2"
+
+    //
+    // ===== Modules =====
+    //
+    app = [
+            [configuration: "compileOnly", dependency: javax_annotations],
+            [configuration: "implementation", dependency: android_appcompat],
+            [configuration: "implementation", dependency: android_constraintlayout],
+            [configuration: "implementation", dependency: android_extensions],
+            [configuration: "implementation", dependency: android_material],
+            [configuration: "implementation", dependency: android_navigation_fragment_ktx],
+            [configuration: "implementation", dependency: android_navigation_ui_ktx],
+            [configuration: "implementation", dependency: android_recyclerview_v7],
+            [configuration: "implementation", dependency: dagger],
+            [configuration: "implementation", dependency: dagger_android_support],
+            [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
+            [configuration: "implementation", dependency: rxandroid],
+            [configuration: "implementation", dependency: rxjava],
+            [configuration: "kapt", dependency: dagger_android_processor],
+            [configuration: "kapt", dependency: dagger_compiler],
+
+            [configuration: "androidTestImplementation", dependency: android_test_runner],
+            [configuration: "androidTestImplementation", dependency: android_junit],
+            [configuration: "testImplementation", dependency: junit]
+    ]
+
+    persistence = [
+            [configuration: "api", dependency: room_runtime],
+            [configuration: "compileOnly", dependency: javax_annotations],
+            [configuration: "implementation", dependency: dagger],
+            [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
+            [configuration: "kapt", dependency: dagger_compiler],
+            [configuration: "kapt", dependency: room_compiler],
+
+            [configuration: "androidTestImplementation", dependency: android_test_runner],
+            [configuration: "androidTestImplementation", dependency: android_junit],
+            [configuration: "testImplementation", dependency: junit]
+    ]
+
+    network = [
+            [configuration: "api", dependency: okhttp3_logging_interceptor],
+            [configuration: "api", dependency: retrofit],
+            [configuration: "api", dependency: retrofit_adapter_rxjava2],
+            [configuration: "api", dependency: retrofit_converter_moshi],
+            [configuration: "compileOnly", dependency: javax_annotations],
+            [configuration: "implementation", dependency: dagger],
+            [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
+            [configuration: "kapt", dependency: dagger_compiler],
+
+            [configuration: "androidTestImplementation", dependency: android_test_runner],
+            [configuration: "androidTestImplementation", dependency: android_junit],
+            [configuration: "testImplementation", dependency: junit]
+    ]
+
+    integration = [
+            [configuration: "compileOnly", dependency: javax_annotations],
+            [configuration: "implementation", dependency: dagger],
+            [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
+            [configuration: "implementation", dependency: retrofit],
+            [configuration: "kapt", dependency: dagger_compiler],
+
+            [configuration: "androidTestImplementation", dependency: android_test_runner],
+            [configuration: "androidTestImplementation", dependency: android_junit],
+            [configuration: "testImplementation", dependency: junit],
+            [configuration: "testImplementation", dependency: reactive_streams]
+    ]
+
+    mock = [
+            [configuration: "implementation", dependency: gson],
+            [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
+            [configuration: "implementation", dependency: retrofit_adapter_rxjava2]
+    ]
+}
