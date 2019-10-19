@@ -19,8 +19,8 @@ ext {
     retrofit = "com.squareup.retrofit2:retrofit:2.6.1"
     retrofit_adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:2.6.1"
     retrofit_converter_moshi = "com.squareup.retrofit2:converter-moshi:2.6.1"
-    room_compiler = "android.arch.persistence.room:compiler:1.1.1"
-    room_runtime = "android.arch.persistence.room:runtime:1.1.1"
+    room_compiler = "androidx.room:room-compiler:2.2.0"
+    room_runtime = "androidx.room:room-runtime:2.2.0"
     rxandroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
     rxjava = "io.reactivex.rxjava2:rxjava:2.2.10"
 
@@ -28,7 +28,9 @@ ext {
     android_test_runner = "androidx.test:runner:1.2.0"
     gson = "com.google.code.gson:gson:2.8.5"
     junit = "junit:junit:4.12"
+    mockito_core = "org.mockito:mockito-core:3.1.0"
     reactive_streams = "org.reactivestreams:reactive-streams:1.0.2"
+    room_testing = "androidx.room:room-testing:2.2.0"
 
     //
     // ===== Modules =====
@@ -90,8 +92,6 @@ ext {
             [configuration: "implementation", dependency: retrofit],
             [configuration: "kapt", dependency: dagger_compiler],
 
-            [configuration: "androidTestImplementation", dependency: android_test_runner],
-            [configuration: "androidTestImplementation", dependency: android_junit],
             [configuration: "testImplementation", dependency: junit],
             [configuration: "testImplementation", dependency: reactive_streams]
     ]

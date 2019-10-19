@@ -10,9 +10,12 @@ fun <T, E : CacheEntity> Observable<T>.handleCache(
     entityToDomainMapper: (E) -> T
 ): Observable<T> {
     return this
-        .doOnNext { bean -> cacheDao.save(domainToEntityMapper.invoke(bean)) }
         .onErrorReturn {
             val entity = cacheDao.get()
-            if (entity == null) null else entityToDomainMapper.invoke(entity)
+            if (entity != null)
+                entityToDomainMapper.invoke(entity)
+            else
+                throw IllegalStateException("Could not find cached data!")
         }
+        .doOnNext { bean -> cacheDao.save(domainToEntityMapper.invoke(bean)) }
 }
