@@ -17,4 +17,8 @@ class PersistenceModule {
     @Provides
     @Singleton
     fun provideTreeDao(database: AppDatabase) = database.treeDao()
+
+    @Provides
+    @Singleton
+    fun providePreloadDao(database: AppDatabase) = database.preloadDao()
 }

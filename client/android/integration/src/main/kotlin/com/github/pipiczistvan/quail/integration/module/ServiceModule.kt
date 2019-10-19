@@ -6,6 +6,7 @@ import com.github.pipiczistvan.quail.integration.service.impl.PreloadServiceImpl
 import com.github.pipiczistvan.quail.integration.service.impl.TreeServiceImpl
 import com.github.pipiczistvan.quail.network.module.NetworkModule
 import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
+import com.github.pipiczistvan.quail.persistence.database.dao.PreloadDao
 import com.github.pipiczistvan.quail.persistence.database.dao.TreeDao
 import com.github.pipiczistvan.quail.persistence.module.PersistenceModule
 import dagger.Module
@@ -17,7 +18,7 @@ class ServiceModule {
 
     @Provides
     @Singleton
-    fun providePreloadService(preloadApi: PreloadApi): PreloadService = PreloadServiceImpl(preloadApi)
+    fun providePreloadService(preloadApi: PreloadApi, preloadDao: PreloadDao): PreloadService = PreloadServiceImpl(preloadApi, preloadDao)
 
     @Provides
     @Singleton

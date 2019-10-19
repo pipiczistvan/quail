@@ -40,11 +40,8 @@ class SplashScreenFragment : ViewModelFragment<SplashScreenViewModel>() {
 
         viewModel.preloadData.observe(viewLifecycleOwner,
             Observer { preload ->
-                // todo: delayed for testing
-                Handler().postDelayed(Runnable {
-                    val direction = actionSplashScreenFragmentToTreeListFragment(TreeListFragmentArgument(preload.availableTreeIds))
-                    findNavController().navigate(direction)
-                }, 3000)
+                val direction = actionSplashScreenFragmentToTreeListFragment(TreeListFragmentArgument(preload.availableTreeIds))
+                findNavController().navigate(direction)
             }
         )
     }
