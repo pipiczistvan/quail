@@ -1,1 +1,1 @@
-include ':app', ':persistence', ':integration', ':network', ':mock'
+include ':app', ':persistence', ':integration', ':network', ':mock', ':common'

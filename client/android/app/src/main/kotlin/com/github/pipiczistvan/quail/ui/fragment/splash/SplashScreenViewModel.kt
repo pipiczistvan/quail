@@ -4,7 +4,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.pipiczistvan.quail.R
-import com.github.pipiczistvan.quail.integration.domain.Preload
+import com.github.pipiczistvan.quail.common.domain.Preload
 import com.github.pipiczistvan.quail.integration.service.PreloadService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

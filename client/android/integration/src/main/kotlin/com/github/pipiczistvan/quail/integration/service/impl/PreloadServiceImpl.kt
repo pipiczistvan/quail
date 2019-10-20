@@ -1,6 +1,6 @@
 package com.github.pipiczistvan.quail.integration.service.impl
 
-import com.github.pipiczistvan.quail.integration.domain.Preload
+import com.github.pipiczistvan.quail.common.domain.Preload
 import com.github.pipiczistvan.quail.integration.service.PreloadService
 import com.github.pipiczistvan.quail.integration.utils.extension.handleCache
 import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
@@ -12,8 +12,5 @@ internal class PreloadServiceImpl(private val preloadApi: PreloadApi, private va
     override fun preload(): Observable<Preload> =
         preloadApi.preload()
             .map { preload -> Preload(preload.availableTreeIds) }
-            .handleCache(preloadDao,
-                { p -> PreloadEntity(p.availableTreeIds) },
-                { e -> Preload(e.availableTreeIds) }
-            )
+            .handleCache(preloadDao, Preload.serializer(), PreloadEntity::class.java)
 }

@@ -8,6 +8,7 @@ apply from: '../buildsystem/android_commons.gradle'
 dependencies {
     api project(':network')
     api project(':persistence')
+    implementation project(':common')
     testImplementation project(":mock")
 
     rootProject.integration.each { item ->
