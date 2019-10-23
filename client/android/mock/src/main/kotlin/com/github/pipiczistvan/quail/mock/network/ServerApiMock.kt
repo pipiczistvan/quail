@@ -10,9 +10,9 @@ abstract class ServerApiMock {
         serverAvailable = available
     }
 
-    protected inline fun <reified T : Any> mockServer(file: String) : Observable<T> =
+    protected inline fun <reified T : Any> mockServer(path: String) : Observable<T> =
         if (serverAvailable)
-            Observable.fromCallable { ApiUtils.getUrl<T>(file) }
+            Observable.fromCallable { ApiUtils.getResponse<T>(path) }
         else
             Observable.error(IllegalStateException("Could not reach server!"))
 }

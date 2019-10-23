@@ -3,12 +3,6 @@ apply plugin: 'kotlin-android'
 
 apply from: '../buildsystem/android_commons.gradle'
 
-android {
-    sourceSets {
-        test.resources.srcDirs = ["src/test/assets"]
-    }
-}
-
 dependencies {
     implementation project(':network')
     implementation project(':persistence')
