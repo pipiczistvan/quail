@@ -9,7 +9,7 @@ const {
   PORT = 3000
 } = process.env;
 const PRELOAD_JSON = 'res/preload.json';
-const TREES_JSON = 'res/trees.json';
+const PREVIEWS_JSON = 'res/previews.json';
 
 app.get('/', (req: Request, res: Response) => {
   res.send({
@@ -22,9 +22,8 @@ app.get("/preload", (req: Request, res: Response) => {
   res.send(data);
 });
 
-app.get("/getTreesByIds", (req: Request, res: Response) => {
-  const data = JSON.parse(fs.readFileSync(TREES_JSON, 'utf8'));
-  console.log(req.body);
+app.get("/getPreviewsByIds", (req: Request, res: Response) => {
+  const data = JSON.parse(fs.readFileSync(PREVIEWS_JSON, 'utf8'));
   const ids = req.body.ids;
   const filteredData = data.filter(item => ids.includes(item.id));
 
