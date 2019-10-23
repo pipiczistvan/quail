@@ -4,8 +4,8 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.pipiczistvan.quail.R
-import com.github.pipiczistvan.quail.common.domain.Preload
 import com.github.pipiczistvan.quail.integration.service.PreloadService
+import com.github.pipiczistvan.quail.network.rest.bean.PreloadBean
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +15,7 @@ class SplashScreenViewModel @Inject constructor(private val preloadService: Prel
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
-    val preloadData: MutableLiveData<Preload> = MutableLiveData()
+    val preloadData: MutableLiveData<PreloadBean> = MutableLiveData()
     val errorClickListener = View.OnClickListener { preload() }
 
     private lateinit var subscription: Disposable
@@ -50,7 +50,7 @@ class SplashScreenViewModel @Inject constructor(private val preloadService: Prel
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrievePreloadSuccess(preload: Preload) {
+    private fun onRetrievePreloadSuccess(preload: PreloadBean) {
         preloadData.value = preload
     }
 

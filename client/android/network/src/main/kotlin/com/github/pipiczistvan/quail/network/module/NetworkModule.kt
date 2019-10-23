@@ -1,6 +1,6 @@
 package com.github.pipiczistvan.quail.network.module
 
-import com.github.pipiczistvan.quail.common.utils.JsonDateAdapter
+import JsonDateAdapter
 import com.github.pipiczistvan.quail.network.rest.api.PreloadApi
 import com.squareup.moshi.Moshi
 import dagger.Module

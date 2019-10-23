@@ -63,7 +63,6 @@ ext {
             [configuration: "compileOnly", dependency: javax_annotations],
             [configuration: "implementation", dependency: dagger],
             [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
-            [configuration: "implementation", dependency: kotlinx_serialization],
             [configuration: "kapt", dependency: dagger_compiler],
             [configuration: "kapt", dependency: room_compiler],
 
@@ -80,6 +79,7 @@ ext {
             [configuration: "compileOnly", dependency: javax_annotations],
             [configuration: "implementation", dependency: dagger],
             [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
+            [configuration: "implementation", dependency: kotlinx_serialization],
             [configuration: "kapt", dependency: dagger_compiler],
 
             [configuration: "androidTestImplementation", dependency: android_test_runner],
@@ -91,17 +91,12 @@ ext {
             [configuration: "compileOnly", dependency: javax_annotations],
             [configuration: "implementation", dependency: dagger],
             [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
+            [configuration: "implementation", dependency: kotlinx_serialization],
             [configuration: "implementation", dependency: retrofit],
             [configuration: "kapt", dependency: dagger_compiler],
 
             [configuration: "testImplementation", dependency: junit],
             [configuration: "testImplementation", dependency: reactive_streams]
-    ]
-
-    common = [
-            [configuration: "api", dependency: kotlinx_serialization],
-            [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
-            [configuration: "api", dependency: retrofit_converter_moshi]
     ]
 
     mock = [

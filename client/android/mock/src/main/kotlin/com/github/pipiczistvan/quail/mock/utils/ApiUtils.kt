@@ -1,6 +1,6 @@
 package com.github.pipiczistvan.quail.mock.utils
 
-import com.github.pipiczistvan.quail.common.utils.JsonDateAdapter
+import JsonDateAdapter
 import com.google.gson.reflect.TypeToken
 import com.squareup.moshi.Moshi
 import java.io.BufferedReader

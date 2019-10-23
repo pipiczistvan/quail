@@ -1,10 +1,10 @@
 package com.github.pipiczistvan.quail.integration.service
 
-import com.github.pipiczistvan.quail.common.domain.Preload
+import DATE_FORMAT
 import com.github.pipiczistvan.quail.integration.service.impl.PreloadServiceImpl
 import com.github.pipiczistvan.quail.mock.network.PreloadApiMock
 import com.github.pipiczistvan.quail.mock.persistence.PreloadDaoMock
-import com.github.pipiczistvan.quail.common.utils.DATE_FORMAT
+import com.github.pipiczistvan.quail.network.rest.bean.PreloadBean
 import com.github.pipiczistvan.quail.persistence.database.entity.PreloadEntity
 import io.reactivex.exceptions.CompositeException
 import kotlinx.serialization.json.Json
@@ -38,7 +38,7 @@ class PreloadServiceTest {
     @Test
     fun preload_from_cache() {
         val preloadEntity = PreloadEntity()
-        preloadEntity.data = JSON_DECODER.stringify(Preload.serializer(), createExpectedPreload())
+        preloadEntity.data = JSON_DECODER.stringify(PreloadBean.serializer(), createExpectedPreload())
 
         preloadDao.save(preloadEntity)
         preloadApi.setAvailable(false)
@@ -58,11 +58,11 @@ class PreloadServiceTest {
         observable.test().assertError(CompositeException::class.java)
     }
 
-    private fun createExpectedPreload() = Preload(
+    private fun createExpectedPreload() = PreloadBean(
         listOf(
-            Preload.AvailablePreview(1, DATE_FORMAT.parse("2019-10-20T10:51:00Z")!!),
-            Preload.AvailablePreview(2, DATE_FORMAT.parse("2019-10-20T10:51:00Z")!!),
-            Preload.AvailablePreview(3, DATE_FORMAT.parse("2019-10-20T10:51:00Z")!!)
+            PreloadBean.AvailablePreview(1, DATE_FORMAT.parse("2019-10-20T10:51:00Z")!!),
+            PreloadBean.AvailablePreview(2, DATE_FORMAT.parse("2019-10-20T10:51:00Z")!!),
+            PreloadBean.AvailablePreview(3, DATE_FORMAT.parse("2019-10-20T10:51:00Z")!!)
         )
     )
 }

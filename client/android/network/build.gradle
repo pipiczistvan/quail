@@ -2,12 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
 
 apply from: '../buildsystem/android_commons.gradle'
 
 dependencies {
-    implementation project(':common')
-
     rootProject.network.each { item ->
         add(item.configuration, item.dependency, item.options)
     }

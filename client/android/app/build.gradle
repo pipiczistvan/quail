@@ -27,7 +27,6 @@ android {
 
 dependencies {
     implementation project(':integration')
-    implementation project(':common')
     testImplementation project(':mock')
 
     rootProject.app.each { item ->
