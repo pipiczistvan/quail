@@ -11,6 +11,6 @@ import io.reactivex.Observable
 internal class PreloadServiceImpl(private val preloadApi: PreloadApi, private val preloadDao: PreloadDao) : PreloadService {
     override fun preload(): Observable<Preload> =
         preloadApi.preload()
-            .map { preload -> Preload(preload.availableTreeIds) }
+            .map { preload -> Preload(preload.availablePreviews) }
             .handleCache(preloadDao, Preload.serializer(), PreloadEntity::class.java)
 }

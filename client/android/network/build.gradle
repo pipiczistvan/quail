@@ -6,6 +6,8 @@ apply plugin: 'kotlin-kapt'
 apply from: '../buildsystem/android_commons.gradle'
 
 dependencies {
+    implementation project(':common')
+
     rootProject.network.each { item ->
         add(item.configuration, item.dependency, item.options)
     }

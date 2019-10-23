@@ -1,7 +1,6 @@
 package com.github.pipiczistvan.quail.ui.fragment.splash
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +39,7 @@ class SplashScreenFragment : ViewModelFragment<SplashScreenViewModel>() {
 
         viewModel.preloadData.observe(viewLifecycleOwner,
             Observer { preload ->
-                val direction = actionSplashScreenFragmentToTreeListFragment(TreeListFragmentArgument(preload.availableTreeIds))
+                val direction = actionSplashScreenFragmentToTreeListFragment(TreeListFragmentArgument(preload.availablePreviews.map { p -> p.id }))
                 findNavController().navigate(direction)
             }
         )

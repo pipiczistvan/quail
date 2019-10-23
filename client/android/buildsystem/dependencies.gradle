@@ -100,7 +100,8 @@ ext {
 
     common = [
             [configuration: "api", dependency: kotlinx_serialization],
-            [configuration: "implementation", dependency: kotlin_stdlib_jdk8]
+            [configuration: "implementation", dependency: kotlin_stdlib_jdk8],
+            [configuration: "api", dependency: retrofit_converter_moshi]
     ]
 
     mock = [

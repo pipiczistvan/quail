@@ -1,7 +1,16 @@
 {
-  "availableTreeIds": [
-    1,
-    2,
-    3
+  "availablePreviews": [
+    {
+      "id": 1,
+      "lastModified": "2019-10-20T10:51:00Z"
+    },
+    {
+      "id": 2,
+      "lastModified": "2019-10-20T10:51:00Z"
+    },
+    {
+      "id": 3,
+      "lastModified": "2019-10-20T10:51:00Z"
+    }
   ]
 }

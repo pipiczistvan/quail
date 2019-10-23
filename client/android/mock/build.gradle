@@ -12,6 +12,7 @@ android {
 dependencies {
     implementation project(':network')
     implementation project(':persistence')
+    implementation project(':common')
 
     rootProject.mock.each { item ->
         add(item.configuration, item.dependency, item.options)

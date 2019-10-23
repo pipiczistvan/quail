@@ -4,6 +4,7 @@ import com.github.pipiczistvan.quail.common.domain.Preload
 import com.github.pipiczistvan.quail.integration.service.impl.PreloadServiceImpl
 import com.github.pipiczistvan.quail.mock.network.PreloadApiMock
 import com.github.pipiczistvan.quail.mock.persistence.PreloadDaoMock
+import com.github.pipiczistvan.quail.common.utils.DATE_FORMAT
 import com.github.pipiczistvan.quail.persistence.database.entity.PreloadEntity
 import io.reactivex.exceptions.CompositeException
 import kotlinx.serialization.json.Json
@@ -29,7 +30,7 @@ class PreloadServiceTest {
     @Test
     fun preload_from_server() {
         val observable = preloadService.preload()
-        val expected = Preload(listOf(1, 2, 3))
+        val expected = createExpectedPreload()
 
         observable.test().assertValue(expected)
     }
@@ -37,13 +38,13 @@ class PreloadServiceTest {
     @Test
     fun preload_from_cache() {
         val preloadEntity = PreloadEntity()
-        preloadEntity.data = JSON_DECODER.stringify(Preload.serializer(), Preload(listOf(3, 2, 1)))
+        preloadEntity.data = JSON_DECODER.stringify(Preload.serializer(), createExpectedPreload())
 
         preloadDao.save(preloadEntity)
         preloadApi.setAvailable(false)
 
         val observable = preloadService.preload()
-        val expected = Preload(listOf(3, 2, 1))
+        val expected = createExpectedPreload()
 
         observable.test().assertValue(expected)
     }
@@ -56,4 +57,12 @@ class PreloadServiceTest {
 
         observable.test().assertError(CompositeException::class.java)
     }
+
+    private fun createExpectedPreload() = Preload(
+        listOf(
+            Preload.AvailablePreview(1, DATE_FORMAT.parse("2019-10-20T10:51:00Z")!!),
+            Preload.AvailablePreview(2, DATE_FORMAT.parse("2019-10-20T10:51:00Z")!!),
+            Preload.AvailablePreview(3, DATE_FORMAT.parse("2019-10-20T10:51:00Z")!!)
+        )
+    )
 }

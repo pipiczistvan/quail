@@ -1,5 +1,6 @@
 package com.github.pipiczistvan.quail.mock.utils
 
+import com.github.pipiczistvan.quail.common.utils.JsonDateAdapter
 import com.google.gson.reflect.TypeToken
 import com.squareup.moshi.Moshi
 import java.io.BufferedReader
@@ -35,7 +36,7 @@ class ApiUtils {
             inputStream.close()
             bufferedReader.close()
 
-            val moshi = Moshi.Builder().build()
+            val moshi = Moshi.Builder().add(JsonDateAdapter()).build()
             val jsonAdapter = moshi.adapter<T>(object : TypeToken<T>() {}.type)
 
             return jsonAdapter.fromJson(buf.toString())!!
