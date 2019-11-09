@@ -42,8 +42,10 @@ project.afterEvaluate {
             description = "Generate Jacoco coverage reports for the ${variantName.capitalize()} build."
 
             reports {
-                html.enabled = true
                 xml.enabled = true
+                xml.destination = file("${buildDir}/reports/jacoco/report.xml")
+                html.enabled = false
+                csv.enabled = false
             }
 
             def classDirs = modules.collect { module -> fileTree(dir: "$project.rootDir/${module}/build/tmp/kotlin-classes/${variantName}", excludes: excludes) }
